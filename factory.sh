@@ -80,6 +80,13 @@ get_image() {
     fi
 }
 
+
+reset_ssh_keys() {
+    . $1\
+    ssh-keygen -R $VM_FQDN
+    ssh-keygen -R $VM_IP
+}
+
 get_windows_image() {
     destfile=${WIN_VM_DISKFILE_BACKING:-$VM_IMG_DIR/$WIN_IMG_NAME.qcow2}
     if ! $SUDOCMD test -f $destfile ; then
